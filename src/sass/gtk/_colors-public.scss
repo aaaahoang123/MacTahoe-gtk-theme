@@ -43,7 +43,7 @@ $theme_text: currentColor;
 @define-color error_color #{"" + $error_color};
 @define-color success_color #{"" + $success_color};
 
-@define-color placeholder_text_color #{"" + $drop_target_color};
+@define-color placeholder_text_color #{"" + $hint_fg_color};
 @define-color link_color #{"" + $link_color};
 
 @define-color content_view_bg #{"" + $base_color};
