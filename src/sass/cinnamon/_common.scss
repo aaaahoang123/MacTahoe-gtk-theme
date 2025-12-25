@@ -1787,7 +1787,7 @@ StScrollBar {
 %modal_dialog_window {
   @if $variant == 'light' {
     color: $text_color;
-    background-color: $dialog_bg_color;
+    background-color: $base_color;
     box-shadow: 0 2px 8px rgba(black, 0.15);
     border: 1px solid rgba(black, 0.2);
   } @else {
