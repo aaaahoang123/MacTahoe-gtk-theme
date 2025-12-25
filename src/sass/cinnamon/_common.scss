@@ -112,6 +112,29 @@ stage {
   &:insensitive { @include button(osd-insensitive); }
 }
 
+%modal_dialog_button {
+  min-height: 20px;
+  padding: 5px 32px;
+  transition-duration: 100ms;
+  border-radius: $bt_radius;
+
+  @if $variant == 'light' {
+    @include button(normal);
+
+    &:hover { @include button(hover); }
+    &:focus { color: $selected_bg_color; }
+    &:active { @include button(active); }
+    &:insensitive { @include button(insensitive); }
+  } @else {
+    @include button(osd);
+
+    &:hover { @include button(osd-hover); }
+    &:focus { color: $selected_bg_color; }
+    &:active { @include button(osd-active); }
+    &:insensitive { @include button(osd-insensitive); }
+  }
+}
+
 //
 // Entries
 //
@@ -1204,7 +1227,7 @@ StScrollBar {
 
 .dialog,
 .modal-dialog {
-  @extend %osd_window;
+  @extend %modal_dialog_window;
 
   > StBoxLayout:first-child {
     padding: 20px 10px 10px 10px;
@@ -1222,7 +1245,7 @@ StScrollBar {
     padding: $container_padding $container_padding * 2;
     min-height: 24px;
     min-width: 100px;
-    @extend %osd_button;
+    @extend %modal_dialog_button;
 
     &:destructive-action {
       background-color: $destructive_color;
@@ -1413,6 +1436,13 @@ StScrollBar {
   &-password-entry {
     @extend %entry;
     width: 20em;
+
+    @if $variant == 'light' {
+      // Ensure proper contrast for light theme
+      color: $text_color;
+      background-color: $base_color;
+      border-color: $borders_color;
+    }
   }
 
   &-password-layout { spacing: $base_margin * 2;}
@@ -1422,6 +1452,10 @@ StScrollBar {
   &-null-label {
     text-align: center;
     @extend %caption;
+
+    @if $variant == 'light' {
+      color: $text_color;
+    }
   }
 
   &-error-label { color: $error_color; }
@@ -1745,6 +1779,23 @@ StScrollBar {
   background-color: $osd_bg_color;
   box-shadow: inset 0 0 0 1px rgba(white, 0.08);
   border: 1px solid black;
+  border-radius: $wm_radius * 1.5;
+  text-align: center;
+  padding: 20px;
+}
+
+%modal_dialog_window {
+  @if $variant == 'light' {
+    color: $text_color;
+    background-color: $dialog_bg_color;
+    box-shadow: 0 2px 8px rgba(black, 0.15);
+    border: 1px solid rgba(black, 0.2);
+  } @else {
+    color: $osd_fg_color;
+    background-color: $osd_bg_color;
+    box-shadow: inset 0 0 0 1px rgba(white, 0.08);
+    border: 1px solid black;
+  }
   border-radius: $wm_radius * 1.5;
   text-align: center;
   padding: 20px;
